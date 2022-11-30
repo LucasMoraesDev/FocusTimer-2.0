@@ -7,12 +7,28 @@
 :root {
   font-size: 62.5%;
 
-  --main-color: hsla(194, 97%, 31%, 1);
-  --bg-color: hsla(0, 0%, 100%, 1);
-  --btn-bg-color: hsla(240, 9%, 89%, 1);
-  --text-color: hsla(240, 6%, 21%, 1);
+  --main-color: #02799d;
+  --fill-color: #323238;
+  --fill-color-unselected: #323238;
+  --fill-color-selected: #ffffff;
+  --bg-color: #ffffff;
+  --btn-bg-color: #e1e1e6;
 
-  --main-gap: clamp(3rem, 15vw, 19.2rem);
+  --main-color-light: #02799d;
+  --fill-color-light: #323238;
+  --fill-color-unselected-light: #323238;
+  --fill-color-selected-light: #ffffff;
+  --bg-color-light: #ffffff;
+  --btn-bg-color-light: #e1e1e6;
+
+  --main-color-dark: #1b5b6b;
+  --fill-color-dark: #ffffff;
+  --fill-color-unselected-dark: #c4c4cc;
+  --fill-color-selected-dark: #ffffff;
+  --bg-color-dark: #121214;
+  --btn-bg-color-dark: #29292e;
+
+  --main-gap: clamp(3rem, 13vw, 19.2rem);
 }
 
 body {
@@ -30,14 +46,14 @@ main {
 button {
   border: none;
   background: none;
+}
+
+button svg:hover {
+  transform: scale(1.15);
   cursor: pointer;
 }
 
-button:hover {
-  transform: scale(1.15);
-}
-
-button:disabled {
+button:disabled svg {
   cursor: not-allowed;
 }
 
@@ -45,8 +61,12 @@ button:disabled svg path {
   fill: var(--main-color);
 }
 
-button:disabled:hover {
+button:disabled svg:hover {
   transform: scale(1);
+}
+
+svg path {
+  fill: var(--fill-color-unselected);
 }
 
 .timer {
@@ -63,7 +83,7 @@ button:disabled:hover {
   font-family: "Roboto", sans-serif;
   text-align: center;
   text-transform: uppercase;
-  color: var(--text-color);
+  color: var(--fill-color);
 
   margin-bottom: 1.7rem;
 }
@@ -71,6 +91,16 @@ button:disabled:hover {
 .controls {
   display: flex;
   gap: 4rem;
+}
+
+.displayMode {
+  position: absolute;
+  top: 8%;
+  right: 5%;
+}
+
+.displayMode svg path {
+  fill: var(--fill-color-unselected);
 }
 
 .sounds {
@@ -85,13 +115,45 @@ button:disabled:hover {
   background: var(--btn-bg-color);
   border-radius: 2.4rem;
 
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 3.2rem;
+  align-items: center;
+  justify-content: center;
 }
 
-.card:hover {
-  transform: scale(1.05);
-  filter: brightness(1.025);
+.card svg:hover {
+  transform: scale(1.1);
+}
+
+input[type="number"] {
+  width: 9rem;
+}
+
+.card .slider {
+  appearance: none;
+  width: 9rem;
+  height: 0.4rem;
+  border-radius: 5rem;
+  background: var(--fill-color);
+}
+
+/* Input Thumb */
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
+  height: 1.6rem;
+  width: 1.6rem;
+  border-radius: 50%;
+  background: var(--fill-color);
+  cursor: ew-resize;
+}
+
+.card.selected .slider {
+  background: var(--fill-color-selected);
+}
+
+.card.selected .slider::-webkit-slider-thumb {
+  background: var(--fill-color-selected);
 }
 
 .florest {
@@ -115,7 +177,13 @@ button:disabled:hover {
 }
 
 .selected svg path {
-  fill: var(--bg-color);
+  fill: var(--fill-color-selected);
+}
+
+.hide {
+  opacity: 0;
+  visibility: hidden;
+  display: none;
 }
 
 @media (max-width: 810px) {
@@ -133,8 +201,15 @@ button:disabled:hover {
 
   .controls {
     display: flex;
-    gap: 3.4rem;
+    gap: 1.5rem;
     justify-content: center;
+  }
+
+  .displayMode {
+    position: unset;
+    inset: unset;
+    display: grid;
+    place-items: center;
   }
 
   .sounds {

@@ -1,4 +1,9 @@
-export function Sounds() {
+export function Sounds({
+  florestRange,
+  rainRange,
+  coffeeShopRange,
+  firePlaceRange,
+}) {
   const kitchenTimer = new Audio("assets/Toque-de-notificação-Xiaomi.mp3");
   const florestAudio = new Audio("assets/Floresta.wav");
   const rainAudio = new Audio("assets/Chuva.wav");
@@ -9,6 +14,12 @@ export function Sounds() {
   rainAudio.loop = true;
   coffeeShopAudio.loop = true;
   firePlaceAudio.loop = true;
+
+  florestAudio.volume = Number(florestRange.value / 100);
+  rainAudio.volume = Number(rainRange.value / 100);
+  coffeeShopAudio.volume = Number(coffeeShopRange.value / 100);
+  firePlaceAudio.volume = Number(firePlaceRange.value / 100);
+  kitchenTimer.volume = Number(15 / 100);
 
   function timeEnd() {
     kitchenTimer.play();

@@ -7,6 +7,16 @@ import {
   rainButton,
   coffeeShopButton,
   firePlaceButton,
+  florestSvg,
+  rainSvg,
+  coffeeShopSvg,
+  firePlaceSvg,
+  florestRange,
+  rainRange,
+  coffeeShopRange,
+  firePlaceRange,
+  lightModeButton,
+  darkModeButton,
 } from "./elements.js";
 
 export function Events({ controls, sounds, timer }) {
@@ -26,7 +36,7 @@ export function Events({ controls, sounds, timer }) {
     timer.minusButtonClick();
   });
 
-  florestButton.addEventListener("click", () => {
+  florestSvg.addEventListener("click", () => {
     sounds.pauseAllAudios();
     if (florestButton.classList.contains("selected")) {
       controls.unselectAll();
@@ -36,7 +46,7 @@ export function Events({ controls, sounds, timer }) {
     }
   });
 
-  rainButton.addEventListener("click", () => {
+  rainSvg.addEventListener("click", () => {
     sounds.pauseAllAudios();
     if (rainButton.classList.contains("selected")) {
       controls.unselectAll();
@@ -46,7 +56,7 @@ export function Events({ controls, sounds, timer }) {
     }
   });
 
-  coffeeShopButton.addEventListener("click", () => {
+  coffeeShopSvg.addEventListener("click", () => {
     sounds.pauseAllAudios();
     if (coffeeShopButton.classList.contains("selected")) {
       controls.unselectAll();
@@ -56,7 +66,7 @@ export function Events({ controls, sounds, timer }) {
     }
   });
 
-  firePlaceButton.addEventListener("click", () => {
+  firePlaceSvg.addEventListener("click", () => {
     sounds.pauseAllAudios();
     if (firePlaceButton.classList.contains("selected")) {
       controls.unselectAll();
@@ -64,5 +74,27 @@ export function Events({ controls, sounds, timer }) {
       controls.firePlaceButtonClick();
       sounds.firePlaceAudio.play();
     }
+  });
+
+  florestRange.addEventListener("change", () => {
+    sounds.florestAudio.volume = Number(florestRange.value / 100);
+  });
+  rainRange.addEventListener("change", () => {
+    sounds.rainAudio.volume = Number(rainRange.value / 100);
+  });
+
+  coffeeShopRange.addEventListener("change", () => {
+    sounds.coffeeShopAudio.volume = Number(coffeeShopRange.value / 100);
+  });
+  firePlaceRange.addEventListener("change", () => {
+    sounds.firePlaceAudio.volume = Number(firePlaceRange.value / 100);
+  });
+
+  lightModeButton.addEventListener("click", () => {
+    controls.lightModeButtonClick();
+  });
+
+  darkModeButton.addEventListener("click", () => {
+    controls.darkModeButtonClick();
   });
 }
